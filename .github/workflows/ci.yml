@@ -25,3 +25,6 @@ jobs:
         flake8-flags: ''
         mypy-flags: ''
         fail-on-isort: false
+    - run: python -m pytest -vv
+    
+      
