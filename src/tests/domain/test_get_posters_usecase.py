@@ -1,3 +1,4 @@
+# type: ignore
 from src.domain.errors.failures import DomainFailure, Failure, NotFoundFailure
 from src.domain.repositories.scraping_repository import ScrapingRepository
 from src.domain.entities.poster_entity import PosterEnitity

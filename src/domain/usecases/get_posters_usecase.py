@@ -1,3 +1,4 @@
+# type: ignore
 import logging
 from src.domain.errors.failures import DomainFailure, Failure
 from src.domain.repositories.scraping_repository import ScrapingRepository

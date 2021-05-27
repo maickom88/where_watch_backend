@@ -1,3 +1,4 @@
+# type: ignore
 from abc import ABC, abstractmethod
 from src.domain.entities.poster_entity import PosterEnitity
 from typing import List
