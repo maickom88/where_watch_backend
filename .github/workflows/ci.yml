@@ -13,7 +13,7 @@ on:
 jobs:
   python-lint:
     runs-on: ubuntu-latest
-    name: CI workflow
+    name: Linting 
     steps:
       - name: checkout source repo
         uses: actions/checkout@v2

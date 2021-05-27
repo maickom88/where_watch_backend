@@ -16,7 +16,10 @@ def test_should_return_list_posts():
     result = usecase.call(input=NoParams())
 
     assert isinstance(result, list)
+    assert len(result) > 0
     assert isinstance(result[0], PosterEnitity)
+    posts = result[0]
+    assert posts.url == post.url
 
 
 def test_should_return_list_posts_empty():
