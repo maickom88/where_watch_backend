@@ -6,4 +6,5 @@ from typing import List
 class ScrapingRepository(ABC):
     @abstractmethod
     def get_posters(self) -> List[PosterEnitity]:
+
         pass

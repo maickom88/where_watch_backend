@@ -9,8 +9,7 @@ class Usecase(Generic[INPUT, OUTPUT], ABC):
     @abstractmethod
     def call(self, input: INPUT) -> List[OUTPUT]:
         pass
-    
+
 
 class NoParams:
     pass
-    
