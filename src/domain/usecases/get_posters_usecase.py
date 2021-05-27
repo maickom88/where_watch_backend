@@ -16,6 +16,6 @@ class GetPostersUsecase(Usecase[NoParams, PosterEnitity]):
         except Failure as error:
             logging.exception(f"Failed to retrieve posts:${error}")
             raise error
-        except:
+        except Exception:
             logging.exception("Failed to retrieve posts: DomainError")
             raise DomainFailure()

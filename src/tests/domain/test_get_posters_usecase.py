@@ -32,7 +32,7 @@ def test_should_return_exception_domain_error():
     usecase = GetPostersUsecase(repository)
     try:
         result = usecase.call(input=NoParams())
-    except:
+    except Exception:
         result = DomainFailure()
 
     assert isinstance(result, Failure)
