@@ -23,7 +23,6 @@ jobs:
       with:
         python-root: '.'
         flake8-flags: ''
-        mypy-flags: ''
         fail-on-isort: false
 
     - name: commit isort changes
