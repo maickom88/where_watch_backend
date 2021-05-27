@@ -1,4 +1,3 @@
-# noqa: W292
 class PosterEnitity:
     url: str
     image: str
@@ -8,3 +7,4 @@ class PosterEnitity:
         self.url = url
         self.image = image
         self.type_poster = type_poster
+        # noqa: W292
