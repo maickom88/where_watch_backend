@@ -18,4 +18,5 @@ class GetPostersUsecase(Usecase[NoParams, PosterEnitity]):
             raise error
         except Exception:
             logging.exception("Failed to retrieve posts: DomainError")
-            raise DomainFailure() # noqa: W292
+            # noqa: W292
+            raise DomainFailure()
