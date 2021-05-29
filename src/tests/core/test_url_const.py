@@ -1,5 +1,5 @@
-from src.core.enums.providers import Providers
 # type: ignore
+from src.core.enums.providers import Providers
 from src.core.constants.url_consts import UrlConst
 
 
