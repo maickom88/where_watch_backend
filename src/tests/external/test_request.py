@@ -1,3 +1,4 @@
+# type: ignore
 from src.external.requests import Requests
 
 url: str = "https://en.wikipedia.org/wiki/Web_scraping"
