@@ -1,3 +1,4 @@
+# type: ignore
 class PosterEntity:
     url: str
     image: str

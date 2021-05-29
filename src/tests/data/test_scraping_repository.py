@@ -1,3 +1,4 @@
+# type: ignore
 from src.domain.errors.failures import Failure, NotFoundFailure
 from src.data.repositories import scraping_repository_impl
 from src.data.datasources.scraping_datasource import ScrapingDatasource

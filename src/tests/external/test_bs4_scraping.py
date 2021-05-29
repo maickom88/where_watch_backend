@@ -1,3 +1,4 @@
+# type: ignore
 from src.domain.entities.poster_entity import PosterEntity
 from src.external.requests import Requests
 from src.data.repositories.http_repository_impl import HttpReposiroyImpl
