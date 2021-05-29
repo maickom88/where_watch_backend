@@ -1,3 +1,4 @@
+# type: ignore
 from src.data.datasources.http_datasource import HttpDatasource
 from src.domain.errors.failures import Failure
 from typing import Type

@@ -1,3 +1,4 @@
+# type: ignore
 from src.domain.errors.failures import Failure, NotFoundFailure
 from src.domain.errors.failures import ResponseFailure
 from src.data.datasources.http_datasource import HttpDatasource
