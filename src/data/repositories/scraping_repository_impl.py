@@ -1,3 +1,4 @@
+# type: ignore
 from typing import List, Type
 from src.domain.repositories.scraping_repository import ScrapingRepository
 from src.data.models.poster_model import PosterModel

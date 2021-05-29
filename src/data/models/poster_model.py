@@ -1,4 +1,4 @@
-
+# type: ignore
 from src.domain.entities.poster_entity import PosterEntity
 
 

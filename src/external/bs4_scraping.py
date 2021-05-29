@@ -1,3 +1,4 @@
+# type: ignore
 import logging
 from src.data.models.poster_model import PosterModel
 from typing import Any, List
