@@ -1,3 +1,4 @@
+# type: ignore
 class Failure(Exception):
     def get_message_error(self) -> str:
         pass

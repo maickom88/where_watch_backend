@@ -1,3 +1,4 @@
+# type: ignore
 from src.domain.errors.failures import DomainFailure, Failure
 from src.domain.errors.failures import NotFoundFailure, ResponseFailure
 from unittest.mock import Mock
