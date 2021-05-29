@@ -1,5 +1,4 @@
-# type: ignore
-class PosterEnitity:
+class PosterEntity:
     url: str
     image: str
     type_poster: str

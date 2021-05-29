@@ -2,18 +2,18 @@
 import logging
 from src.domain.errors.failures import DomainFailure, Failure
 from src.domain.repositories.scraping_repository import ScrapingRepository
-from src.domain.entities.poster_entity import PosterEnitity
+from src.domain.entities.poster_entity import PosterEntity
 from src.core.usecases.usecases import NoParams, Usecase
 from typing import List, Type
 
 
-class GetPostersUsecase(Usecase[NoParams, PosterEnitity]):
+class GetPostersUsecase(Usecase[NoParams, PosterEntity]):
     def __init__(self, scrapingRepository: Type[ScrapingRepository]):
         self.scrapingRepository = scrapingRepository
 
-    def call(self, input: NoParams) -> List[PosterEnitity]:
+    def call(self, input: bytes) -> List[PosterEntity]:
         try:
-            return self.scrapingRepository.get_posters()
+            return self.scrapingRepository.get_posters(input)
         except Failure as error:
             logging.exception(f"Failed to retrieve posts:${error}")
             raise error
