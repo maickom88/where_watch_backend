@@ -22,17 +22,6 @@ def test_should_return_list_posts():
     assert posts.url == post.url
 
 
-def test_should_return_list_posts():
-    datasource.get_posters.return_value = [post]
-    result = repository.get_posters(bytes)
-
-    assert isinstance(result, list)
-    assert len(result) > 0
-    assert isinstance(result[0], PosterEntity)
-    posts = result[0]
-    assert posts.url == post.url
-
-
 def test_should_return_list_posts_empty():
     datasource.get_posters.return_value = []
     result = repository.get_posters(bytes)
