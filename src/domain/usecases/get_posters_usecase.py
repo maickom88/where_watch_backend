@@ -3,11 +3,11 @@ import logging
 from src.domain.errors.failures import DomainFailure, Failure
 from src.domain.repositories.scraping_repository import ScrapingRepository
 from src.domain.entities.poster_entity import PosterEntity
-from src.core.usecases.usecases import NoParams, Usecase
+from src.core.usecases.usecases import Usecase
 from typing import List, Type
 
 
-class GetPostersUsecase(Usecase[NoParams, PosterEntity]):
+class GetPostersUsecase(Usecase[bytes, List[PosterEntity]]):
     def __init__(self, scrapingRepository: Type[ScrapingRepository]):
         self.scrapingRepository = scrapingRepository
 

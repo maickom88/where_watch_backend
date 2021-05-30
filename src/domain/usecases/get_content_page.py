@@ -6,7 +6,7 @@ from src.domain.repositories.http_repository import HttpRepository
 from typing import Type
 
 
-class GetContentPage(Usecase[str, str]):
+class GetContentPage(Usecase[str, bytes]):
     def __init__(self, http_repository: Type[HttpRepository]):
         self.http_repository = http_repository
 

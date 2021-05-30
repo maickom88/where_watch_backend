@@ -1,9 +1,9 @@
 # type: ignore
 import logging
 from src.data.models.poster_model import PosterModel
+from src.data.models.result_search_model import ResultSearchModel
 from typing import Any, List
 from src.domain.errors.failures import ScrapingFailure
-
 from bs4 import BeautifulSoup
 from src.data.datasources.scraping_datasource import ScrapingDatasource
 
@@ -25,17 +25,25 @@ class Bs4(ScrapingDatasource):
                     url=link, image=image, type_poster=type_poster)
                 list_posters.append(poster_model)
             return list_posters
-
         except Exception as error:
             logging.exception(
                 f"Failed to retrieve posts on scraping: {error}")
             raise ScrapingFailure()
+
+    def result_search(self) -> List[ResultSearchModel]:
+        pass
 
 
 def get_link_poster(post: Any) -> str:
     link = post.find('a', href=True)
     link = link["href"]
     return link
+
+
+def get_result_title(result: Any) -> str:
+    title = result.findAll('ion-col', class_='md hydrated')[1]
+    title = title.find('span', class_='title-list-row__row__title').text
+    return title
 
 
 def get_image_poster(post: Any):

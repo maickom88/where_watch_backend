@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import TypeVar, Generic, List
+from typing import TypeVar, Generic
 
 INPUT = TypeVar('INPUT')
 OUTPUT = TypeVar('OUTPUT')
@@ -7,7 +7,7 @@ OUTPUT = TypeVar('OUTPUT')
 
 class Usecase(Generic[INPUT, OUTPUT], ABC):
     @abstractmethod
-    def call(self, input: INPUT) -> List[OUTPUT]:
+    def call(self, input: INPUT) -> OUTPUT:
         pass
 
 
