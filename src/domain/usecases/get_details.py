@@ -13,11 +13,11 @@ class GetDetails(Usecase[bytes, DetailsEntity]):
 
     def call(self, input: bytes) -> DetailsEntity:
         try:
-            return self.scrapingRepository.get_posters(input)
+            return self.scrapingRepository.get_details(input)
         except Failure as error:
-            logging.exception(f"Failed to retrieve posts:${error}")
+            logging.exception(f"Failed to retrieve details page: {error}")
             raise error
         except Exception:
-            logging.exception("Failed to retrieve posts: DomainError")
+            logging.exception("Failed to retrieve details: DomainError")
             # noqa: W292
             raise DomainFailure()

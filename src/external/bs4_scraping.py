@@ -1,5 +1,6 @@
 # type: ignore
 import logging
+from src.data.models.details_model import DetailsModel
 from src.data.models.poster_model import PosterModel
 from src.data.models.result_search_model import ResultSearchModel
 from typing import Any, List
@@ -31,6 +32,9 @@ class Bs4(ScrapingDatasource):
             raise ScrapingFailure()
 
     def result_search(self) -> List[ResultSearchModel]:
+        pass
+
+    def get_details(self) -> DetailsModel:
         pass
 
 

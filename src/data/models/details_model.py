@@ -1,9 +1,10 @@
 # type: ignore
-from src.domain.entities.poster_entity import PosterEntity
+from src.data.models.poster_model import PosterModel
+from src.domain.entities.details_entity import DetailsEntity
 from typing import List
 
 
-class DetailsEntity:
+class DetailsModel(DetailsEntity):
     banners: List[str]
     sinopse: str
     poster_image: str
@@ -11,7 +12,7 @@ class DetailsEntity:
     runtime: str
     title: str
     year: str
-    seansons: List[PosterEntity]
+    seansons: List[PosterModel]
     genders: List[str]
     providers: List[str]
 
@@ -24,7 +25,7 @@ class DetailsEntity:
                  year: str,
                  sinopse: str,
                  providers: List[str],
-                 seansons: List[PosterEntity],
+                 seansons: List[PosterModel],
                  genders: List[str]):
         self.title = title
         self.year = year

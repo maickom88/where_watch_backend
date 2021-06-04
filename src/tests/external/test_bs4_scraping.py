@@ -13,6 +13,7 @@ http_repository = HttpReposiroyImpl(datasource_repository)
 usecase = GetContentPage(http_repository)
 url = "https://www.justwatch.com/br?providers=dnp,gop,nfx,prv"
 url2 = 'https://www.justwatch.com/br/busca?providers=dnp,gop,nfx,prv&q=fri'
+url3 = 'https://www.justwatch.com/br/serie/stranger-things'
 
 
 def test_should_return_list_posts():
@@ -29,3 +30,9 @@ def test_should_return_list_results():
     scraping = WebDiverScraping(url2)
     result = scraping.result_search()
     assert isinstance(result, list)
+
+
+def test_should_return_details_page():
+    scraping = WebDiverScraping(url3)
+    result = scraping.get_details()
+    print(result)

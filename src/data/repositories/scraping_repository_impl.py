@@ -1,4 +1,5 @@
 # type: ignore
+from src.data.models.details_model import DetailsModel
 from typing import List, Type
 from src.domain.repositories.scraping_repository import ScrapingRepository
 from src.data.models.poster_model import PosterModel
@@ -20,5 +21,11 @@ class ScrapingRepositoryImpl(ScrapingRepository):
     def result_search(self, content: bytes) -> List[ResultSearchModel]:
         try:
             return self.datasource.result_search(content)
+        except Failure as error:
+            raise error
+
+    def get_details(self, content: bytes) -> DetailsModel:
+        try:
+            return self.datasource.get_details(content)
         except Failure as error:
             raise error
