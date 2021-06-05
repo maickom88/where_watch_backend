@@ -13,7 +13,7 @@ http_repository = HttpReposiroyImpl(datasource_repository)
 usecase = GetContentPage(http_repository)
 url = "https://www.justwatch.com/br?providers=dnp,gop,nfx,prv"
 url2 = 'https://www.justwatch.com/br/busca?providers=dnp,gop,nfx,prv&q=fri'
-url3 = 'https://www.justwatch.com/br/serie/stranger-things'
+url3 = 'https://www.justwatch.com/br/filme/interestelar'
 
 
 def test_should_return_list_posts():

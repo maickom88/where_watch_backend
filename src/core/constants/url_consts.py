@@ -3,7 +3,7 @@ from typing import List
 from src.core.enums.providers import Providers
 
 
-base_url = "https://www.justwatch.com/br?"
+base_url = "https://www.justwatch.com"
 
 
 class UrlConst(object):
@@ -17,7 +17,11 @@ class UrlConst(object):
     @staticmethod
     def posters_endpoint(providers: List[Providers] = providers) -> str:
         string_providers = assemble_providers(providers)
-        return f'{base_url}providers={string_providers}'
+        return f'{base_url}/br?providers={string_providers}'
+
+    @staticmethod
+    def details_endpoint(link: str) -> str:
+        return f'{base_url}{link}'
 
 
 def assemble_providers(providers: List[Providers]) -> str:

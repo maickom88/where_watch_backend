@@ -1,21 +1,18 @@
 # type: ignore
+from typing import Optional
+from pydantic.main import BaseModel
 from src.domain.entities.poster_entity import PosterEntity
 
 
-class PosterModel(PosterEntity):
+class PosterModel(BaseModel, PosterEntity, object):
     url: str
     image: str
-    type_poster: str
+    type_poster: Optional[str] = None
 
-    def __init__(self, url: str, image: str, type_poster: str):
-        self.url = url
-        self.image = image
-        self.type_poster = type_poster
-        # noqa: W292
-
-    def toString(self):
-        print(
-            f'''
-            URL: {self.url}\n
-            IMAGE: {self.image}\n
-            TYPE: {self.type_poster}''')
+    @staticmethod
+    def toMap(poster: PosterEntity) -> dict:
+        return {
+            'url': poster.url,
+            'image': poster.image,
+            'type_poster': poster.type_poster,
+        }

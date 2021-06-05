@@ -1,7 +1,7 @@
 # type: ignore
 import logging
-from src.data.models.details_model import DetailsModel
-from src.data.models.poster_model import PosterModel
+from src.domain.entities.details_entity import DetailsEntity
+from src.domain.entities.poster_entity import PosterEntity
 from src.data.models.result_search_model import ResultSearchModel
 from typing import Any, List
 from src.domain.errors.failures import ScrapingFailure
@@ -13,16 +13,16 @@ class Bs4(ScrapingDatasource):
     def __init__(self, bs4: BeautifulSoup):
         self.bs4 = bs4
 
-    def get_posters(self) -> List[PosterModel]:
+    def get_posters(self) -> List[PosterEntity]:
         try:
-            list_posters: List[PosterModel] = []
+            list_posters: List[PosterEntity] = []
             posters = self.bs4.findAll(
                 'div', class_='title-list-grid__item')
             for post in posters:
                 link = get_link_poster(post)
                 image = get_image_poster(post)
                 type_poster = get_type_poster(post)
-                poster_model = PosterModel(
+                poster_model = PosterEntity(
                     url=link, image=image, type_poster=type_poster)
                 list_posters.append(poster_model)
             return list_posters
@@ -34,7 +34,7 @@ class Bs4(ScrapingDatasource):
     def result_search(self) -> List[ResultSearchModel]:
         pass
 
-    def get_details(self) -> DetailsModel:
+    def get_details(self) -> DetailsEntity:
         pass
 
 

@@ -8,7 +8,7 @@ from typing import List
 
 class ScrapingRepository(ABC):
     @abstractmethod
-    def get_posters(self, content: bytes) -> List[PosterEntity]:
+    def get_posters(self) -> List[PosterEntity]:
         pass  # noqa: W292
 
     @abstractmethod
@@ -16,5 +16,5 @@ class ScrapingRepository(ABC):
         pass  # noqa: W292
 
     @abstractmethod
-    def get_details(self, content: bytes) -> DetailsEntity:
+    def get_details(self) -> DetailsEntity:
         pass  # noqa: W292

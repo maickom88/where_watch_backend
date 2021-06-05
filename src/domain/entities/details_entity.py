@@ -1,31 +1,32 @@
 # type: ignore
 from src.domain.entities.poster_entity import PosterEntity
-from typing import List
+from typing import List, Optional
 
 
 class DetailsEntity:
-    banners: List[str]
-    sinopse: str
+    banners: list
     poster_image: str
-    type_poster: str
+    sinopse: str
+    type_poster: Optional[str] = None
     runtime: str
     title: str
     year: str
-    seansons: List[PosterEntity]
+    seansons: Optional[List[Optional[PosterEntity]]] = None
     genders: List[str]
     providers: List[str]
 
     def __init__(self,
                  title: str,
-                 banners: List[str],
-                 type_poster: str,
+                 banners: list,
                  poster_image: str,
                  runtime: str,
                  year: str,
                  sinopse: str,
                  providers: List[str],
-                 seansons: List[PosterEntity],
-                 genders: List[str]):
+                 genders: List[str],
+                 seansons: Optional[List[Optional[PosterEntity]]] = None,
+                 type_poster: Optional[str] = None
+                 ):
         self.title = title
         self.year = year
         self.seansons = seansons
