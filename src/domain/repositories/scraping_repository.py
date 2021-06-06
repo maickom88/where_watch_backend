@@ -12,7 +12,7 @@ class ScrapingRepository(ABC):
         pass  # noqa: W292
 
     @abstractmethod
-    def result_search(self, content: bytes) -> List[ResultSearchEntity]:
+    def result_search(self) -> List[ResultSearchEntity]:
         pass  # noqa: W292
 
     @abstractmethod

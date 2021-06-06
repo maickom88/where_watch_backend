@@ -17,7 +17,29 @@ class WebDiverScraping(ScrapingDatasource):
         self.url = url
 
     def get_posters(self) -> List[PosterEntity]:
-        pass
+        try:
+            driver = configure_set_up_driver()
+            driver.get(self.url)
+            page_down(driver)
+            page_down(driver)
+            page_down(driver)
+            list_posters = driver.find_elements_by_class_name(
+                'title-list-grid__item')
+            posters = []
+            for poster in list_posters:
+                link = get_url_page(poster)
+                type_poster = get_type_page(poster)
+                image = get_image_page(poster)
+                poster_entity = PosterEntity(
+                    url=link, type_poster=type_poster, image=image)
+                posters.append(poster_entity)
+            return posters
+        except Exception as error:
+            logging.exception(
+                f"Failed to retrieve posts on scraping: {error}")
+            raise ScrapingFailure()
+        finally:
+            driver.quit()
 
     def result_search(self) -> List[ResultSearchModel]:
         try:
@@ -204,3 +226,8 @@ def getSeansons(list_seansons: list, type_poster) -> list:
         except Exception:
             pass
     return seansons
+
+
+def page_down(element):
+    element.execute_script(
+        'window.scrollTo(0, document.body.scrollHeight)')

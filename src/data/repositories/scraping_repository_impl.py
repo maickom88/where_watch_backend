@@ -12,15 +12,15 @@ class ScrapingRepositoryImpl(ScrapingRepository):
     def __init__(self, datasource: Type[ScrapingDatasource]):
         self.datasource = datasource
 
-    def get_posters(self, content: bytes) -> List[PosterEntity]:
+    def get_posters(self) -> List[PosterEntity]:
         try:
-            return self.datasource.get_posters(content)
+            return self.datasource.get_posters()
         except Failure as error:
             raise error
 
-    def result_search(self, content: bytes) -> List[ResultSearchModel]:
+    def result_search(self) -> List[ResultSearchModel]:
         try:
-            return self.datasource.result_search(content)
+            return self.datasource.result_search()
         except Failure as error:
             raise error
 

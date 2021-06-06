@@ -1,4 +1,5 @@
 # type: ignore
+from src.domain.entities.details_entity import DetailsEntity
 from src.domain.entities.poster_entity import PosterEntity
 from src.external.requests import Requests
 from src.data.repositories.http_repository_impl import HttpReposiroyImpl
@@ -35,4 +36,10 @@ def test_should_return_list_results():
 def test_should_return_details_page():
     scraping = WebDiverScraping(url3)
     result = scraping.get_details()
-    print(result)
+    assert isinstance(result, DetailsEntity)
+
+
+def test_should_return_posters():
+    scraping = WebDiverScraping(url)
+    result = scraping.get_posters()
+    assert isinstance(result, list)
