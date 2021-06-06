@@ -1,4 +1,6 @@
 # type: ignore
+from src.core.constants.url_consts import UrlConst
+from src.core.enums.providers import Providers
 from typing import List
 from src.data.models.poster_model import PosterModel
 from src.domain.errors.failures import Failure
@@ -11,16 +13,18 @@ from fastapi.responses import JSONResponse
 router = APIRouter()
 
 
-psoters_router = {
+posters_router = {
     "router": router,
     "prefix": "/posters",
     "tags": ["Posters"],
 }
 
 
-@router.get(path='', response_model=List[PosterModel])
-async def get_posters():
-    url = 'https://www.justwatch.com/br?providers=dnp,gop,nfx,prv'
+@router.post(path='', response_model=List[PosterModel])
+async def get_posters(providers: List[Providers]):
+
+    url = UrlConst.posters_endpoint(providers)
+    print(url)
     usecase = setUp(url)
     try:
         result = usecase.call(NoParams())

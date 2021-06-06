@@ -1,7 +1,7 @@
 # type: ignore
 from fastapi import FastAPI
 from src.routes.details import details_router
-from src.routes.posters import psoters_router
+from src.routes.posters import posters_router
 
 
 def init_app():
@@ -18,7 +18,7 @@ def init_app():
 def config_app_routers(app):
     routers = [
         details_router,
-        psoters_router
+        posters_router
     ]
     routers.sort(key=lambda r: r.get("prefix"))
     [app.include_router(**r) for r in routers]
