@@ -1,10 +1,9 @@
 # type: ignore
 import logging
+from src.domain.entities.result_search_entity import ResultSearchEntity
 from src.domain.entities.poster_entity import PosterEntity
 from src.domain.entities.details_entity import DetailsEntity
-
 from selenium.webdriver.chrome.webdriver import WebDriver
-from src.data.models.result_search_model import ResultSearchModel
 from typing import List
 from src.domain.errors.failures import ScrapingFailure
 from selenium import webdriver
@@ -20,9 +19,11 @@ class WebDiverScraping(ScrapingDatasource):
         try:
             driver = configure_set_up_driver()
             driver.get(self.url)
-            page_down(driver)
-            page_down(driver)
-            page_down(driver)
+            driver = page_down(driver)
+            driver = page_down(driver)
+            driver = page_down(driver)
+            driver = page_down(driver)
+
             list_posters = driver.find_elements_by_class_name(
                 'title-list-grid__item')
             posters = []
@@ -41,11 +42,15 @@ class WebDiverScraping(ScrapingDatasource):
         finally:
             driver.quit()
 
-    def result_search(self) -> List[ResultSearchModel]:
+    def result_search(self) -> List[ResultSearchEntity]:
         try:
-            list_results_search: List[ResultSearchModel] = []
+            list_results_search: List[ResultSearchEntity] = []
             driver = configure_set_up_driver()
             driver.get(self.url)
+            driver = page_down(driver)
+            driver = page_down(driver)
+            driver = page_down(driver)
+            driver = page_down(driver)
 
             results = driver.find_elements_by_tag_name('ion-row')
             for result in results:
@@ -53,15 +58,15 @@ class WebDiverScraping(ScrapingDatasource):
                     'ion-col')[0]
                 col2:  WebDriver = result.find_elements_by_tag_name(
                     'ion-col')[1]
-                title = get_title_page(col2)
-                year = get_year_page(col2)
-                type_poster = get_type_page(col1)
-                url = get_url_page(col1)
+                title: str = get_title_page(col2)
+                year: str = get_year_page(col2)
+                type_poster: str = get_type_page(col1)
+                url: str = get_url_page(col1)
                 list_providers = get_providers_page(col2)
                 image = get_image_page(col1)
                 poster = PosterEntity(url=url, image=image,
                                       type_poster=type_poster)
-                result_model = ResultSearchModel(
+                result_model = ResultSearchEntity(
                     title=title,
                     providers=list_providers,
                     year=year,
@@ -81,6 +86,7 @@ class WebDiverScraping(ScrapingDatasource):
         try:
             driver = configure_set_up_driver()
             driver.get(self.url)
+
             image: WebDriver = driver.find_element_by_tag_name('picture')
             type_poster: str = get_type_page(driver)
             image: str = get_image_page(image)
@@ -102,7 +108,7 @@ class WebDiverScraping(ScrapingDatasource):
 
             genders = getGenders(list_gender)
             providers = getProviders(list_providers)
-            banners = getBanners(list_banners)
+            banners = getBanners(list_banners, driver)
             seansons = getSeansons(list_seansons, type_poster)
 
             details = DetailsEntity(
@@ -128,12 +134,12 @@ class WebDiverScraping(ScrapingDatasource):
 
 def get_title_page(col2):
     return col2.find_element_by_class_name(
-        'title-list-row__row__title')
+        'title-list-row__row__title').text
 
 
 def get_year_page(col2):
     return col2.find_element_by_class_name(
-        'title-list-row__row--muted')
+        'title-list-row__row--muted').text
 
 
 def get_type_page(col1):
@@ -153,10 +159,11 @@ def get_url_page(col1):
 
 
 def get_image_page(col1):
-    image = col1.find_element_by_tag_name('source')
     try:
+        image = col1.find_element_by_tag_name('source')
         image = image.get_attribute('srcset')
     except Exception:
+        image = col1.find_element_by_tag_name('source')
         image = image.get_attribute('data-srcset')
         pass
     image = image.split(',')
@@ -200,13 +207,17 @@ def getGenders(list_gender: list) -> list:
     return genders
 
 
-def getBanners(list_banners: list) -> list:
+def getBanners(list_banners: list, driver) -> list:
+    script = '''document.getElementsByClassName('backdrop-carousel__arrows__arrow--right')
+    [0].click()'''
     banners = []
     for banners_image in list_banners:
         try:
+            driver.execute_script(script)
             picture = banners_image.find_element_by_tag_name('picture')
             image = get_image_page(picture)
             banners.append(image)
+
         except Exception:
             pass
     return banners
@@ -229,5 +240,27 @@ def getSeansons(list_seansons: list, type_poster) -> list:
 
 
 def page_down(element):
-    element.execute_script(
-        'window.scrollTo(0, document.body.scrollHeight)')
+    script = '''function doScrolling(elementY, duration){
+    var startingY = window.pageYOffset;
+    var diff = elementY - startingY;
+    var start;
+    window.requestAnimationFrame(function step(timestamp) {
+        if (!start) start = timestamp;
+        // Elapsed milliseconds since start of scrolling.
+        var time = timestamp - start;
+        // Get percent of completion in range [0, 1].
+        var percent = Math.min(time / duration, 1);
+
+        window.scrollTo(0, startingY + diff * percent);
+
+        // Proceed with animation as long as we wanted it to.
+        if (time < duration) {
+        window.requestAnimationFrame(step);
+        }
+    })
+    }
+    doScrolling(document.body.scrollHeight, 5000)
+    '''
+
+    element.execute_script(script)
+    return element

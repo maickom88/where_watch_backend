@@ -29,7 +29,9 @@ def test_should_return_list_posts():
 
 def test_should_return_list_results():
     scraping = WebDiverScraping(url2)
+
     result = scraping.result_search()
+
     assert isinstance(result, list)
 
 

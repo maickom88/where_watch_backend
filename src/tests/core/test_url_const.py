@@ -4,10 +4,10 @@ from src.core.constants.url_consts import UrlConst
 
 
 def test_should_return_many_providers():
-    result = UrlConst.posters_endpoint()
+    result = UrlConst.posters_endpoint([Providers.GLOBOPLAY])
     assert isinstance(result, str)
 
 
 def test_should_return_one_providers():
-    result = UrlConst.posters_endpoint(providers=[Providers.GLOBOPLAY])
+    result = UrlConst.posters_endpoint([Providers.GLOBOPLAY])
     assert isinstance(result, str)

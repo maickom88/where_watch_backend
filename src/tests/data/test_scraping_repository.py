@@ -8,13 +8,11 @@ from unittest.mock import Mock
 datasource = Mock(spec=ScrapingDatasource)
 post = PosterEntity(url="http/algumacoisa", image="açgi", type_poster="aosd")
 repository = scraping_repository_impl.ScrapingRepositoryImpl(datasource)
-bytes = b"0x410x420x43"
 
 
 def test_should_return_list_posts():
     datasource.get_posters.return_value = [post]
-    result = repository.get_posters(bytes)
-
+    result = repository.get_posters()
     assert isinstance(result, list)
     assert len(result) > 0
     assert isinstance(result[0], PosterEntity)
@@ -24,7 +22,7 @@ def test_should_return_list_posts():
 
 def test_should_return_list_posts_empty():
     datasource.get_posters.return_value = []
-    result = repository.get_posters(bytes)
+    result = repository.get_posters()
 
     assert isinstance(result, list)
     assert result == []
@@ -34,7 +32,7 @@ def test_should_return_failure():
     datasource.get_posters.side_effect = NotFoundFailure()
 
     try:
-        result = repository.get_posters(bytes)
+        result = repository.get_posters()
     except Failure as error:
         result = error
 
