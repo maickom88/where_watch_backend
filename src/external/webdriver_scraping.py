@@ -1,5 +1,4 @@
 # type: ignore
-import time
 import logging
 from src.domain.entities.result_search_entity import ResultSearchEntity
 from src.domain.entities.poster_entity import PosterEntity
@@ -184,8 +183,8 @@ def get_providers_page(col2):
 def configure_set_up_driver() -> WebDriver:
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--window-size=1920x1080')
     chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--window-size=1920x1080')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     return webdriver.Chrome(
@@ -215,30 +214,29 @@ def getGenders(list_gender: list) -> list:
 def getBanners(list_banners: list, driver) -> list:
     script = '''document.getElementsByClassName('backdrop-carousel__arrows__arrow--right')
     [0].click()'''
+
     banners = []
     for banners_image in list_banners:
         try:
             driver.execute_script(script)
-            time.sleep(1)
             picture = banners_image.find_element_by_tag_name('picture')
             image = get_image_page(picture)
             banners.append(image)
+
         except Exception:
             pass
     return banners
 
 
 def getSeansons(list_seansons: list, type_poster) -> list:
-    seansons: List[PosterEntity] = None
+    seansons = []
     for se in list_seansons:
         try:
             picture = se.find_element_by_tag_name('picture')
             image = get_image_page(picture)
-            if image is not None:
-                poster = PosterEntity(
-                    image=image, type_poster=type_poster, url='NOT_URL')
-                seansons.append(poster)
-
+            poster = PosterEntity(
+                image=image, type_poster=type_poster, url='NOT_URL')
+            seansons.append(poster)
         except Exception:
             pass
     return seansons
@@ -255,9 +253,7 @@ def page_down(element):
         var time = timestamp - start;
         // Get percent of completion in range [0, 1].
         var percent = Math.min(time / duration, 1);
-
         window.scrollTo(0, startingY + diff * percent);
-
         // Proceed with animation as long as we wanted it to.
         if (time < duration) {
         window.requestAnimationFrame(step);
