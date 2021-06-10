@@ -9,7 +9,7 @@ def init_app():
     app = FastAPI(
         title="Where Watch",
         description="Where Watch API",
-        version='1.0.0',
+        version='1.0.4',
         redoc_url=None
     )
     app = config_app_routers(app)

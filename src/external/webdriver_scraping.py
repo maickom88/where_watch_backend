@@ -86,7 +86,7 @@ class WebDiverScraping(ScrapingDatasource):
         try:
             driver = configure_set_up_driver()
             driver.get(self.url)
-
+            driver = page_down(driver)
             image: WebDriver = driver.find_element_by_tag_name('picture')
             type_poster: str = get_type_page(driver)
             image: str = get_image_page(image)
