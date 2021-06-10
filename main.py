@@ -1,8 +1,8 @@
-from src.core.usecases.usecases import NoParams
-from src.domain.usecases.get_posters_usecase import GetPostersUsecase
+# type: ignore
+from src import init_app
+import uvicorn
 
-usecase = GetPostersUsecase()
 
-result = usecase.call(input=NoParams())
-
-print(result[0].url)
+if __name__ == "__main__":
+    app = init_app()
+    uvicorn.run(app, host='0.0.0.0', port=8080, debug='true')
