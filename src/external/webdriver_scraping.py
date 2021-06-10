@@ -1,4 +1,5 @@
 # type: ignore
+import time
 import logging
 from src.domain.entities.result_search_entity import ResultSearchEntity
 from src.domain.entities.poster_entity import PosterEntity
@@ -183,6 +184,7 @@ def get_providers_page(col2):
 def configure_set_up_driver() -> WebDriver:
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
+    chrome_options.add_argument("--window-size=1200x600")
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -217,10 +219,10 @@ def getBanners(list_banners: list, driver) -> list:
     for banners_image in list_banners:
         try:
             driver.execute_script(script)
+            time.sleep(1)
             picture = banners_image.find_element_by_tag_name('picture')
             image = get_image_page(picture)
             banners.append(image)
-
         except Exception:
             pass
     return banners
