@@ -86,7 +86,7 @@ class WebDiverScraping(ScrapingDatasource):
         try:
             driver = configure_set_up_driver()
             driver.get(self.url)
-
+            driver = page_down(driver)
             image: WebDriver = driver.find_element_by_tag_name('picture')
             type_poster: str = get_type_page(driver)
             image: str = get_image_page(image)
@@ -184,6 +184,7 @@ def configure_set_up_driver() -> WebDriver:
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--window-size=1920x1080')
     chrome_options.add_argument('--no-sandbox')
     return webdriver.Chrome(
         ChromeDriverManager().install(), options=chrome_options)
@@ -210,6 +211,7 @@ def getGenders(list_gender: list) -> list:
 def getBanners(list_banners: list, driver) -> list:
     script = '''document.getElementsByClassName('backdrop-carousel__arrows__arrow--right')
     [0].click()'''
+
     banners = []
     for banners_image in list_banners:
         try:
@@ -224,16 +226,14 @@ def getBanners(list_banners: list, driver) -> list:
 
 
 def getSeansons(list_seansons: list, type_poster) -> list:
-    seansons: List[PosterEntity] = None
+    seansons = []
     for se in list_seansons:
         try:
             picture = se.find_element_by_tag_name('picture')
             image = get_image_page(picture)
-            if image is not None:
-                poster = PosterEntity(
-                    image=image, type_poster=type_poster, url='NOT_URL')
-                seansons.append(poster)
-
+            poster = PosterEntity(
+                image=image, type_poster=type_poster, url='NOT_URL')
+            seansons.append(poster)
         except Exception:
             pass
     return seansons
