@@ -5,7 +5,7 @@
 ## Where Watch<br><br> 🎬  Application to find movies and series and find out where and on which platforms they are available.
 
 
-<img align="center" alt="Rafa-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">This application was made in python using scraper techniques using Seleniu
+<img align="center" alt="Rafa-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">This application was made in python using scraper techniques using Selenium
 
 ### ⚠️ Heads up
 This [api is not official](https://where-watch.herokuapp.com/docs), the data taken comes directly from the website [Just Watch](https://www.justwatch.com/)
