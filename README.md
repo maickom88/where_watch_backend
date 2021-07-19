@@ -8,9 +8,9 @@
 <img align="center" alt="Rafa-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">This application was made in python using scraper techniques using Seleniu
 
 ### ⚠️ Heads up
-This api is not official, the data taken comes directly from the website [Just Watch](https://www.justwatch.com/)
+This [api is not official](https://where-watch.herokuapp.com/docs), the data taken comes directly from the website [Just Watch](https://www.justwatch.com/)
 See website for more details <br>
-You can have the url in production on Heroku by clicking here and have access to documentation.
+You can have the url in production on [Heroku](https://www.heroku.com/) by clicking here and have access to documentation.
 > Wait a few minutes, Heroku sleeps the application if there are no requests at the time
 
 ### 🥳 Let's get started 
