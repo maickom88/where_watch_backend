@@ -19,11 +19,14 @@ You can have the url in production on [Heroku](https://www.heroku.com/) by click
 ```python
 pip install -r requirements.txt
 ```
+
 👇🏼 Soon after runs the command to start the server
+
 ```python
 uvicorn main:app --reload 
 ```
-For now the app is only accepting the following providers
+
+👇🏼 For now the app is only accepting the following providers
 - dnp (Disney Plus)
 - gop (Globo Play)
 - nfx (Netflix)
